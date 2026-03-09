@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGB Light Controller</title>
+
+<!-- Color Wheel Library -->
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+<style>
+
+body{
+    background:#0f172a;
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:white;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:20px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+#wheel{
+    margin:auto;
+}
+
+.colors{
+    margin-top:20px;
+}
+
+.color-btn{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    border:none;
+    margin:5px;
+    cursor:pointer;
+}
+
+.slider{
+    margin-top:20px;
+}
+
+input[type="range"]{
+    width:100%;
+}
+
+.power{
+    margin-top:20px;
+    background:#111827;
+    padding:10px;
+    border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>RGB Light</h2>
+
+<div id="wheel"></div>
+
+<div class="colors">
+
+<button class="color-btn" style="background:red" onclick="setColor('red')"></button>
+<button class="color-btn" style="background:lime" onclick="setColor('lime')"></button>
+<button class="color-btn" style="background:blue" onclick="setColor('blue')"></button>
+<button class="color-btn" style="background:cyan" onclick="setColor('cyan')"></button>
+<button class="color-btn" style="background:yellow" onclick="setColor('yellow')"></button>
+<button class="color-btn" style="background:white" onclick="setColor('white')"></button>
+
+</div>
+
+<div class="slider">
+Brightness
+<input type="range" min="0" max="100" value="100" id="brightness">
+</div>
+
+<div class="power">
+<button onclick="togglePower()">Power</button>
+</div>
+
+</div>
+
+<script>
+
+let power = true;
+
+var colorPicker = new iro.ColorPicker("#wheel", {
+    width:200,
+    color:"#ff0000",
+    borderWidth:2,
+    borderColor:"#fff"
+});
+
+colorPicker.on("color:change", function(color){
+    document.body.style.background = color.hexString;
+});
+
+function setColor(c){
+    colorPicker.color.set(c);
+}
+
+function togglePower(){
+
+    power = !power;
+
+    if(power){
+        document.body.style.background = "#0f172a";
+    }else{
+        document.body.style.background = "black";
+    }
+
+}
+
+</script>
+
+</body>
+</html>
